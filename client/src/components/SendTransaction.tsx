@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 
@@ -15,6 +15,11 @@ const SendTransaction: React.FC = () => {
       type: Actions.SendTransaction,
     });
   }, [dispatch]);
+
+  // Temporary code to prompt a test transaction in Metamask:
+  useEffect(() => {
+    handleDispatch()
+  }, [handleDispatch])
 
   return (
     <>

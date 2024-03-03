@@ -6,6 +6,7 @@ import {
   TransactionReceipt,
   BrowserProvider,
   Signer,
+  parseEther
 } from "ethers";
 
 import apolloClient from "../apollo/client";
@@ -30,7 +31,8 @@ function* sendTransaction() {
 
   const transaction = {
     to: randomAddress(),
-    value: 1000000000000000000,
+    // #3 - The value of a transaction should be denoted in Wei, however numbers such as 1000000000000000000 are too large and will cause an overflow error. Use ethers.js utilities to specify the Eth value which will safetly convert it to Wei.
+    value: parseEther("1.0"),
   };
 
   try {
@@ -58,7 +60,7 @@ function* sendTransaction() {
       variables,
     });
   } catch (error) {
-    //
+    console.log('sendTransaction Error: ', error)
   }
 }
 

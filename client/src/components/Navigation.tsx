@@ -15,6 +15,7 @@ const metamaskSDKWallet = metamaskSDK({
 
 const onboard = Onboard({
   wallets: [
+    // #2 - Add support for metamask wallet
     metamaskSDKWallet
   ],
   chains: [
