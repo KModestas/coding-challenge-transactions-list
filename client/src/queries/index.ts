@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+// #1 - Remove unnecessary "receipt" field from GraphQL query
 export const GetAllTransactions = gql`
   query GetAllTransactions {
     getAllTransactions {
@@ -11,7 +12,6 @@ export const GetAllTransactions = gql`
       data
       chainId
       hash
-      receipt
     }
   }
 `;
