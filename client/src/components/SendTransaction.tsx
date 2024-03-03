@@ -1,14 +1,15 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 
-import { Actions, SendTransactionPayload, RootState, Status} from "../types";
+import { Actions, SendTransactionPayload, RootState, Status } from "../types";
 
 interface Props {
   walletAddress: string
 }
 
 const SendTransaction: React.FC<Props> = ({ walletAddress }) => {
+  const [showModal, setShowModal] = useState(true)
   const dispatch = useDispatch();
   const { handleSubmit, register, formState: { errors } } = useForm<SendTransactionPayload>();
   const transactionStatus = useSelector((state: RootState) => state.transactionStatus);
@@ -20,24 +21,22 @@ const SendTransaction: React.FC<Props> = ({ walletAddress }) => {
     });    
   }, [dispatch]);
 
-   useEffect(() => {
-    if (transactionStatus === Status.success) {
-      console.log('Transaction successful!');
-    } else if (transactionStatus === Status.fail) {
-      console.log('Transaction failed.');
-    }
+  useEffect(() => {
+    if (transactionStatus === Status.success) setShowModal(false)
+    else if (transactionStatus === Status.fail) console.log('Transaction failed.');
   }, [transactionStatus]);
 
   return (
     <>
       <button
+        onClick={() => setShowModal(true)}
         data-hs-overlay="#hs-basic-modal"
         type="button"
         className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
       >
         Send
       </button>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      {showModal && <form onSubmit={handleSubmit(onSubmit)}>
         <div
           id="hs-basic-modal"
           className="hs-overlay hidden w-full h-full fixed top-0 left-0 z-[60] overflow-x-hidden overflow-y-auto bg-black bg-opacity-60"
@@ -94,10 +93,10 @@ const SendTransaction: React.FC<Props> = ({ walletAddress }) => {
                   Recipient:
                 </label>
                 <input
-                {...register("recipient", { 
-                  required: "Recipient address is required",
+                  {...register("recipient", {
+                    required: "Recipient address is required",
                     validate: {
-                      length: value => 
+                      length: value =>
                         value.length === 42 || "Recipient address must be 42 characters long",
                     }
                   })}
@@ -114,13 +113,13 @@ const SendTransaction: React.FC<Props> = ({ walletAddress }) => {
                   Amount (ETH):
                 </label>
                 <input
-                   {...register("amount", { required: "Amount is required" })}
+                  {...register("amount", { required: "Amount is required" })}
                   type="number"
                   id="input-amount"
                   className="opacity-70 pointer-events-none py-3 px-4 block bg-gray-50 border-gray-800 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 w-full"
                   placeholder="Amount (ETH)"
                 />
-                 {errors.amount && <p className="text-red-500 font-bold mt-2">{errors.amount.message}</p>}
+                {errors.amount && <p className="text-red-500 font-bold mt-2">{errors.amount.message}</p>}
               </div>
               <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t">
                 <button
@@ -140,7 +139,7 @@ const SendTransaction: React.FC<Props> = ({ walletAddress }) => {
             </div>
           </div>
         </div>
-      </form>
+      </form>}
     </>
   );
 };
