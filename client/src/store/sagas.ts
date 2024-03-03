@@ -25,7 +25,7 @@ function* sendTransaction(data: Action<SendTransactionPayload>) {
 
   const transaction = {
     to: recipient,
-    // #3 - The value of a transaction should be denoted in Wei, however numbers such as 1000000000000000000 are too large and will cause an overflow error. Use ethers.js utilities to specify the Eth value which will safetly convert it to Wei.
+    // #3 - The value of a transaction should be denoted in Wei, however numbers such as "1000000000000000000" are too large and will cause an overflow error in JavaScript. Use ethers.js utility to specify a value in Ether which will safely be converted to Wei.
     value: parseEther(formattedAmount),
   };
 

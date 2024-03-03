@@ -14,6 +14,7 @@ const SendTransaction: React.FC<Props> = ({ walletAddress }) => {
   const { handleSubmit, register, formState: { errors } } = useForm<SendTransactionPayload>();
   const transactionStatus = useSelector((state: RootState) => state.transactionStatus);
 
+  // #5 - Accept dynamic input values from the from and send them to the sendTransaction saga to be used as part of the transaction.
   const onSubmit = useCallback((data: SendTransactionPayload) => {
     dispatch({
       type: Actions.SendTransaction,
