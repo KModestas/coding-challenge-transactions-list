@@ -1,6 +1,5 @@
 import { takeEvery } from "redux-saga/effects";
 import {
-  JsonRpcProvider,
   Transaction,
   TransactionResponse,
   TransactionReceipt,
@@ -16,26 +15,16 @@ import { navigate } from "../components/NaiveRouter";
 
 function* sendTransaction(data: Action<SendTransactionPayload>) {
   const { recipient, amount } = data.payload
-
-  const provider = new JsonRpcProvider("http://localhost:8545");
+  const formattedAmount = Number(amount).toFixed(1)
 
   const walletProvider = new BrowserProvider(window.web3.currentProvider);
 
   const signer: Signer = yield walletProvider.getSigner();
 
-  const accounts: Array<{ address: string }> = yield provider.listAccounts();
-
-  const randomAddress = () => {
-    const min = 1;
-    const max = 19;
-    const random = Math.round(Math.random() * (max - min) + min);
-    return accounts[random].address;
-  };
-
   const transaction = {
-    to: randomAddress(),
+    to: recipient,
     // #3 - The value of a transaction should be denoted in Wei, however numbers such as 1000000000000000000 are too large and will cause an overflow error. Use ethers.js utilities to specify the Eth value which will safetly convert it to Wei.
-    value: parseEther("1.0"),
+    value: parseEther(formattedAmount),
   };
 
   try {

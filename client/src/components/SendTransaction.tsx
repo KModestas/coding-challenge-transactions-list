@@ -90,14 +90,14 @@ const SendTransaction: React.FC = () => {
                   htmlFor="input-amount"
                   className="block text-sm font-bold my-2"
                 >
-                  Amount:
+                  Amount (ETH):
                 </label>
                 <input
                   {...register("amount")} 
                   type="number"
                   id="input-amount"
                   className="opacity-70 pointer-events-none py-3 px-4 block bg-gray-50 border-gray-800 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 w-full"
-                  placeholder="Amount"
+                  placeholder="Amount (ETH)"
                 />
               </div>
               <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t">
