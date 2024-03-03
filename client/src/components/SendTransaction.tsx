@@ -4,7 +4,11 @@ import { useForm } from "react-hook-form";
 
 import { Actions, SendTransactionPayload } from "../types";
 
-const SendTransaction: React.FC = () => {
+interface Props {
+  walletAddress: string
+}
+
+const SendTransaction: React.FC<Props> = ({ walletAddress }) => {
   const dispatch = useDispatch();
   const { handleSubmit, register } = useForm<SendTransactionPayload>();
 
@@ -68,6 +72,7 @@ const SendTransaction: React.FC = () => {
                 </label>
                 <input
                   type="text"
+                  value={walletAddress}
                   id="input-sender"
                   className="opacity-70 pointer-events-none py-3 px-4 block bg-gray-50 border-gray-800 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 w-full"
                   placeholder="Sender Address (Autocompleted)"
