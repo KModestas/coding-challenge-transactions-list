@@ -1,10 +1,22 @@
 import React, { useCallback, useState } from "react";
 import Onboard, { WalletState } from "@web3-onboard/core";
+import metamaskSDK from "@web3-onboard/metamask";
 
 import SendTransaction from "./SendTransaction";
 
+const metamaskSDKWallet = metamaskSDK({
+    options: {
+        extensionOnly: false,
+        dappMetadata: {
+            name: "Colony Dapp",
+        },
+    },
+});
+
 const onboard = Onboard({
-  wallets: [],
+  wallets: [
+    metamaskSDKWallet
+  ],
   chains: [
     {
       id: "123456",
