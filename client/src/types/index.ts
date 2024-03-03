@@ -41,5 +41,20 @@ export type Action<P> = {
 
 export enum Actions {
   SendTransaction = "SEND_TRANSACTION",
+  SendTransactionSuccess = 'SEND_TRANSACTION_SUCCESS',
+  SendTransactionFail = 'SEND_TRANSACTION_FAIL',
+  SendTransactionLoading = 'SEND_TRANSACTION_LOADING',
 }
 
+export enum Status {
+  loading = 'loading',
+  fail = 'fail',
+  success = 'success',
+}
+
+export type TransactionStatus = Status.loading | Status.fail | Status.success | null
+
+export interface RootState {
+  transactions: any[];
+  transactionStatus: TransactionStatus;
+}

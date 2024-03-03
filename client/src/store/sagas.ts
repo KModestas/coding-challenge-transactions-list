@@ -1,4 +1,4 @@
-import { takeEvery } from "redux-saga/effects";
+import { takeEvery, put } from "redux-saga/effects";
 import {
   Transaction,
   TransactionResponse,
@@ -14,6 +14,8 @@ import { SaveTransaction } from "../queries";
 import { navigate } from "../components/NaiveRouter";
 
 function* sendTransaction(data: Action<SendTransactionPayload>) {
+  yield put({ type: Actions.SendTransactionLoading });
+
   const { recipient, amount } = data.payload
   const formattedAmount = Number(amount).toFixed(1)
 
@@ -55,8 +57,10 @@ function* sendTransaction(data: Action<SendTransactionPayload>) {
 
     const hash = gqlResponse.data.addTransaction.hash
     navigate(`/transaction/${hash}`);
+
+    yield put({ type: Actions.SendTransactionSuccess });
   } catch (error) {
-    console.log('sendTransaction Error: ', error)
+    yield put({ type: Actions.SendTransactionFail });
   }
 }
 

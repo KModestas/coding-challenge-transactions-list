@@ -1,8 +1,8 @@
-import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import React, { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 
-import { Actions, SendTransactionPayload } from "../types";
+import { Actions, SendTransactionPayload, RootState, Status} from "../types";
 
 interface Props {
   walletAddress: string
@@ -11,13 +11,22 @@ interface Props {
 const SendTransaction: React.FC<Props> = ({ walletAddress }) => {
   const dispatch = useDispatch();
   const { handleSubmit, register, formState: { errors } } = useForm<SendTransactionPayload>();
+  const transactionStatus = useSelector((state: RootState) => state.transactionStatus);
 
   const onSubmit = useCallback((data: SendTransactionPayload) => {
     dispatch({
       type: Actions.SendTransaction,
       payload: data,
-    });
+    });    
   }, [dispatch]);
+
+   useEffect(() => {
+    if (transactionStatus === Status.success) {
+      console.log('Transaction successful!');
+    } else if (transactionStatus === Status.fail) {
+      console.log('Transaction failed.');
+    }
+  }, [transactionStatus]);
 
   return (
     <>
