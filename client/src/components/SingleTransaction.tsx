@@ -1,8 +1,10 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
+
 import { GetSingleTransaction } from "../queries";
 import { SingleTransactionData } from "../types";
 import { navigate } from "./NaiveRouter";
+import { shortenAddress, convertWeiToEth } from "../utils"
 
 interface SingleTransactionProps {
   id: string | null;
@@ -60,13 +62,13 @@ const SingleTransaction: React.FC<SingleTransactionProps> = ({ id }) => {
             <span className="font-bold">Transaction Hash:</span> {hash}
           </p>
           <p>
-            <span className="font-bold">Sender Address:</span> {from}
+            <span className="font-bold">Sender Address:</span> {shortenAddress(from)}
           </p>
           <p>
-            <span className="font-bold">Recipient Address:</span> {to}
+            <span className="font-bold">Recipient Address:</span> {shortenAddress(to)}
           </p>
           <p>
-            <span className="font-bold">Amount:</span> {value} ETH
+            <span className="font-bold">Amount:</span> {convertWeiToEth(value)} ETH
           </p>
         </div>
       </div>
