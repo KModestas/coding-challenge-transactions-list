@@ -14,7 +14,9 @@ import { Actions, SaveTransactionData, Action, SendTransactionPayload } from "..
 import { SaveTransaction } from "../queries";
 import { navigate } from "../components/NaiveRouter";
 
-function* sendTransaction(payload: Action<SendTransactionPayload>) {
+function* sendTransaction(data: Action<SendTransactionPayload>) {
+  const { recipient, amount } = data.payload
+
   const provider = new JsonRpcProvider("http://localhost:8545");
 
   const walletProvider = new BrowserProvider(window.web3.currentProvider);

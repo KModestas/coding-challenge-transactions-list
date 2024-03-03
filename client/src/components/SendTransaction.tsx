@@ -67,11 +67,11 @@ const SendTransaction: React.FC = () => {
                   Sender:
                 </label>
                 <input
-                  {...register("sender")} 
                   type="text"
                   id="input-sender"
                   className="opacity-70 pointer-events-none py-3 px-4 block bg-gray-50 border-gray-800 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 w-full"
                   placeholder="Sender Address (Autocompleted)"
+                  disabled
                 />
                 <label
                   htmlFor="input-recipient"
@@ -80,7 +80,7 @@ const SendTransaction: React.FC = () => {
                   Recipient:
                 </label>
                 <input
-                    {...register("recipient")}
+                  {...register("recipient")}
                   type="text"
                   id="input-recipient"
                   className="opacity-70 pointer-events-none py-3 px-4 block bg-gray-50 border-gray-800 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 w-full"

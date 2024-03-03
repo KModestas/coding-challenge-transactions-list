@@ -30,7 +30,6 @@ export interface SaveTransactionData {
 }
 
 export interface SendTransactionPayload {
-  sender: string;
   recipient: string;
   amount: number;
 }
