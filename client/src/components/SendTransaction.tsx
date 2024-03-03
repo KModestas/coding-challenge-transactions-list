@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 
@@ -8,18 +8,13 @@ const SendTransaction: React.FC = () => {
   const dispatch = useDispatch();
   const { handleSubmit } = useForm();
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => {}
 
   const handleDispatch = useCallback(() => {
     dispatch({
       type: Actions.SendTransaction,
     });
   }, [dispatch]);
-
-  // Temporary code to prompt a test transaction in Metamask:
-  useEffect(() => {
-    handleDispatch()
-  }, [handleDispatch])
 
   return (
     <>
@@ -116,7 +111,6 @@ const SendTransaction: React.FC = () => {
                 </button>
                 <button
                   type="button"
-                  onClick={handleDispatch}
                   className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm"
                 >
                   Send
