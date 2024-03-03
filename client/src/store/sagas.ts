@@ -10,11 +10,11 @@ import {
 } from "ethers";
 
 import apolloClient from "../apollo/client";
-import { Actions, SaveTransactionData } from "../types";
+import { Actions, SaveTransactionData, Action, SendTransactionPayload } from "../types";
 import { SaveTransaction } from "../queries";
 import { navigate } from "../components/NaiveRouter";
 
-function* sendTransaction() {
+function* sendTransaction(payload: Action<SendTransactionPayload>) {
   const provider = new JsonRpcProvider("http://localhost:8545");
 
   const walletProvider = new BrowserProvider(window.web3.currentProvider);
