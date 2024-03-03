@@ -10,7 +10,7 @@ interface Props {
 
 const SendTransaction: React.FC<Props> = ({ walletAddress }) => {
   const dispatch = useDispatch();
-  const { handleSubmit, register } = useForm<SendTransactionPayload>();
+  const { handleSubmit, register, formState: { errors } } = useForm<SendTransactionPayload>();
 
   const onSubmit = useCallback((data: SendTransactionPayload) => {
     dispatch({
@@ -85,12 +85,19 @@ const SendTransaction: React.FC<Props> = ({ walletAddress }) => {
                   Recipient:
                 </label>
                 <input
-                  {...register("recipient")}
+                {...register("recipient", { 
+                  required: "Recipient address is required",
+                    validate: {
+                      length: value => 
+                        value.length === 42 || "Recipient address must be 42 characters long",
+                    }
+                  })}
                   type="text"
                   id="input-recipient"
                   className="opacity-70 pointer-events-none py-3 px-4 block bg-gray-50 border-gray-800 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 w-full"
                   placeholder="Recipient Address"
                 />
+                {errors.recipient && <p className="text-red-500 font-bold mt-2">{errors.recipient.message}</p>}
                 <label
                   htmlFor="input-amount"
                   className="block text-sm font-bold my-2"
@@ -98,12 +105,13 @@ const SendTransaction: React.FC<Props> = ({ walletAddress }) => {
                   Amount (ETH):
                 </label>
                 <input
-                  {...register("amount")} 
+                   {...register("amount", { required: "Amount is required" })}
                   type="number"
                   id="input-amount"
                   className="opacity-70 pointer-events-none py-3 px-4 block bg-gray-50 border-gray-800 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 w-full"
                   placeholder="Amount (ETH)"
                 />
+                 {errors.amount && <p className="text-red-500 font-bold mt-2">{errors.amount.message}</p>}
               </div>
               <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t">
                 <button
