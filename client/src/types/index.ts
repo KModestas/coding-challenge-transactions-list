@@ -23,6 +23,12 @@ export interface SingleTransactionData {
   getTransaction: Transaction;
 }
 
+export interface SaveTransactionData {
+  data: {
+    addTransaction: Transaction
+  }
+}
+
 export type Action<P> = {
   type: Actions;
   payload: P;

@@ -10,8 +10,9 @@ import {
 } from "ethers";
 
 import apolloClient from "../apollo/client";
-import { Actions } from "../types";
+import { Actions, SaveTransactionData } from "../types";
 import { SaveTransaction } from "../queries";
+import { navigate } from "../components/NaiveRouter";
 
 function* sendTransaction() {
   const provider = new JsonRpcProvider("http://localhost:8545");
@@ -55,10 +56,14 @@ function* sendTransaction() {
       },
     };
 
-    yield apolloClient.mutate({
+    // #4 - Get the resulting hash returned from our GraphQl mutation and use it to programatically navigate to the new transaction's page 
+    const gqlResponse: SaveTransactionData = yield apolloClient.mutate({
       mutation: SaveTransaction,
       variables,
     });
+
+    const hash = gqlResponse.data.addTransaction.hash
+    navigate(`/transaction/${hash}`);
   } catch (error) {
     console.log('sendTransaction Error: ', error)
   }
