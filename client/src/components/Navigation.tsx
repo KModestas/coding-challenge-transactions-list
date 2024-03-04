@@ -1,17 +1,17 @@
-import React, { useCallback, useState } from "react";
-import Onboard, { WalletState } from "@web3-onboard/core";
-import metamaskSDK from "@web3-onboard/metamask";
+import React, { useCallback, useState } from 'react'
+import Onboard, { WalletState } from '@web3-onboard/core'
+import metamaskSDK from '@web3-onboard/metamask'
 
-import SendTransaction from "./SendTransaction";
+import SendTransaction from './SendTransaction'
 
 const metamaskSDKWallet = metamaskSDK({
-    options: {
-        extensionOnly: false,
-        dappMetadata: {
-            name: "Colony Dapp",
-        },
-    },
-});
+  options: {
+    extensionOnly: false,
+    dappMetadata: {
+      name: 'Colony Dapp'
+    }
+  }
+})
 
 const onboard = Onboard({
   wallets: [
@@ -20,38 +20,32 @@ const onboard = Onboard({
   ],
   chains: [
     {
-      id: "123456",
-      token: "ETH",
-      label: "Local Ganache",
-      rpcUrl: "http://localhost:8545",
-    },
-  ],
-});
+      id: '123456',
+      token: 'ETH',
+      label: 'Local Ganache',
+      rpcUrl: 'http://localhost:8545'
+    }
+  ]
+})
 
 const Navigation: React.FC = () => {
-  const [wallet, setWallet] = useState<WalletState>();
+  const [wallet, setWallet] = useState<WalletState>()
 
   const handleConnect = useCallback(async () => {
-    const wallets = await onboard.connectWallet();
+    const wallets = await onboard.connectWallet()
 
-    const [metamaskWallet] = wallets;
+    const [metamaskWallet] = wallets
 
-    if (
-      metamaskWallet.label === "MetaMask" &&
-      metamaskWallet.accounts[0].address
-    ) {
-      setWallet(metamaskWallet);
+    if (metamaskWallet.label === 'MetaMask' && metamaskWallet.accounts[0].address) {
+      setWallet(metamaskWallet)
     }
-  }, []);
+  }, [])
 
   return (
     <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-ful text-sm py-4 bg-gray-800">
       <nav className="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between">
         <div className="flex items-center justify-between">
-          <a
-            className="flex-none text-xl font-semibold dark:text-white"
-            href="."
-          >
+          <a className="flex-none text-xl font-semibold dark:text-white" href=".">
             Transactions List
           </a>
         </div>
@@ -79,7 +73,7 @@ const Navigation: React.FC = () => {
         </div>
       </nav>
     </header>
-  );
-};
+  )
+}
 
-export default Navigation;
+export default Navigation

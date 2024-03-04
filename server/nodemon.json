@@ -1,7 +1,5 @@
 {
-  "watch": [
-    "."
-  ],
+  "watch": ["."],
   "ext": ".js",
   "ignore": [],
   "exec": "node index.js"

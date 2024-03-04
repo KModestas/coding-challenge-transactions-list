@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 const transactionSchema = new mongoose.Schema({
   nonce: String,
@@ -13,8 +13,8 @@ const transactionSchema = new mongoose.Schema({
   r: String,
   s: String,
   v: String
-});
+})
 
-const Transaction = mongoose.model('Transaction', transactionSchema);
+const Transaction = mongoose.model('Transaction', transactionSchema)
 
-export default Transaction;
+export default Transaction

@@ -1,7 +1,7 @@
-import NaiveRouter from "./components/NaiveRouter";
-import Navigation from "./components/Navigation";
+import NaiveRouter from './components/NaiveRouter'
+import Navigation from './components/Navigation'
 
-import "./App.css";
+import './App.css'
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <Navigation />
       <NaiveRouter />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

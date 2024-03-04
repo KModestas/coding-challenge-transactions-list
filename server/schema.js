@@ -1,4 +1,4 @@
-import { gql } from "graphql-tag";
+import { gql } from 'graphql-tag'
 
 export const typeDefs = gql`
   type Transaction {
@@ -31,4 +31,4 @@ export const typeDefs = gql`
     chainId: String!
     hash: String!
   }
-`;
+`

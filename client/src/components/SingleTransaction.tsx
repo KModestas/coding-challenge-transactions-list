@@ -1,22 +1,21 @@
-import React from "react";
-import { useQuery } from "@apollo/client";
+import React from 'react'
+import { useQuery } from '@apollo/client'
 
-import { GetSingleTransaction } from "../queries";
-import { SingleTransactionData } from "../types";
-import { navigate } from "./NaiveRouter";
-import { shortenAddress, convertWeiToEth } from "../utils"
+import { GetSingleTransaction } from '../queries'
+import { SingleTransactionData } from '../types'
+import { navigate } from './NaiveRouter'
+import { shortenAddress, convertWeiToEth } from '../utils'
 
 interface SingleTransactionProps {
-  id: string | null;
+  id: string | null
 }
 
 const SingleTransaction: React.FC<SingleTransactionProps> = ({ id }) => {
-  const handleGoBack = () => navigate(`/transactions`);
+  const handleGoBack = () => navigate(`/transactions`)
 
-  const { loading, error, data } = useQuery<SingleTransactionData>(
-    GetSingleTransaction,
-    { variables: { hash: id } },
-  );
+  const { loading, error, data } = useQuery<SingleTransactionData>(GetSingleTransaction, {
+    variables: { hash: id }
+  })
 
   if (loading) {
     return (
@@ -25,7 +24,7 @@ const SingleTransaction: React.FC<SingleTransactionProps> = ({ id }) => {
           Loading...
         </div>
       </div>
-    );
+    )
   }
 
   if (error) {
@@ -35,10 +34,10 @@ const SingleTransaction: React.FC<SingleTransactionProps> = ({ id }) => {
           Error: {error.message}
         </div>
       </div>
-    );
+    )
   }
 
-  const { hash, to, from, value } = data?.getTransaction || {};
+  const { hash, to, from, value } = data?.getTransaction || {}
 
   return (
     <div>
@@ -73,7 +72,7 @@ const SingleTransaction: React.FC<SingleTransactionProps> = ({ id }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SingleTransaction;
+export default SingleTransaction

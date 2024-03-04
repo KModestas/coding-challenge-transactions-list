@@ -1,17 +1,15 @@
-import React from "react";
-import { useQuery } from "@apollo/client";
+import React from 'react'
+import { useQuery } from '@apollo/client'
 
-import { GetAllTransactions } from "../queries";
-import { TransactionsData } from "../types";
-import { navigate } from "./NaiveRouter";
-import { shortenAddress, convertWeiToEth } from "../utils"
+import { GetAllTransactions } from '../queries'
+import { TransactionsData } from '../types'
+import { navigate } from './NaiveRouter'
+import { shortenAddress, convertWeiToEth } from '../utils'
 
 const TransactionList: React.FC = () => {
+  const { loading, error, data } = useQuery<TransactionsData>(GetAllTransactions)
 
-  const { loading, error, data } =
-    useQuery<TransactionsData>(GetAllTransactions);
-
-  const handleNavigate = (hash: string) => navigate(`/transaction/${hash}`);
+  const handleNavigate = (hash: string) => navigate(`/transaction/${hash}`)
 
   if (loading) {
     return (
@@ -20,7 +18,7 @@ const TransactionList: React.FC = () => {
           Loading...
         </div>
       </div>
-    );
+    )
   }
 
   if (error) {
@@ -30,7 +28,7 @@ const TransactionList: React.FC = () => {
           Error: {error.message}
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -45,8 +43,8 @@ const TransactionList: React.FC = () => {
                   className="bg-white shadow-sm p-4 md:p-5 border rounded border-gray-300 mt-3 hover:border-blue-500 cursor-pointer"
                   onClick={() => handleNavigate(hash)}
                 >
-                  <span className="font-bold">{convertWeiToEth(value)} ETH</span> sent from{" "}
-                  <span className="font-bold">{shortenAddress(from)}</span> to{" "}
+                  <span className="font-bold">{convertWeiToEth(value)} ETH</span> sent from{' '}
+                  <span className="font-bold">{shortenAddress(from)}</span> to{' '}
                   <span className="font-bold">{shortenAddress(to)}</span>
                 </div>
               ))}
@@ -57,7 +55,7 @@ const TransactionList: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TransactionList;
+export default TransactionList

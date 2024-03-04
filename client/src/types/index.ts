@@ -1,26 +1,26 @@
 declare global {
   interface Window {
-    web3: any;
+    web3: any
   }
 }
 
 export interface Transaction {
-  gasLimit: string;
-  gasPrice: string;
-  to: string;
-  from: string;
-  value: string;
-  data?: string;
-  chainId: string;
-  hash: string;
+  gasLimit: string
+  gasPrice: string
+  to: string
+  from: string
+  value: string
+  data?: string
+  chainId: string
+  hash: string
 }
 
 export interface TransactionsData {
-  getAllTransactions: Transaction[];
+  getAllTransactions: Transaction[]
 }
 
 export interface SingleTransactionData {
-  getTransaction: Transaction;
+  getTransaction: Transaction
 }
 
 export interface SaveTransactionData {
@@ -30,31 +30,31 @@ export interface SaveTransactionData {
 }
 
 export interface SendTransactionPayload {
-  recipient: string;
-  amount: number;
+  recipient: string
+  amount: number
 }
 
 export type Action<P> = {
-  type: Actions;
-  payload: P;
-};
+  type: Actions
+  payload: P
+}
 
 export enum Actions {
-  SendTransaction = "SEND_TRANSACTION",
+  SendTransaction = 'SEND_TRANSACTION',
   SendTransactionSuccess = 'SEND_TRANSACTION_SUCCESS',
   SendTransactionFail = 'SEND_TRANSACTION_FAIL',
-  SendTransactionLoading = 'SEND_TRANSACTION_LOADING',
+  SendTransactionLoading = 'SEND_TRANSACTION_LOADING'
 }
 
 export enum Status {
   loading = 'loading',
   fail = 'fail',
-  success = 'success',
+  success = 'success'
 }
 
 export type TransactionStatus = Status.loading | Status.fail | Status.success | null
 
 export interface RootState {
-  transactions: any[];
-  transactionStatus: TransactionStatus;
+  transactions: any[]
+  transactionStatus: TransactionStatus
 }

@@ -1,16 +1,16 @@
-import { configureStore } from "@reduxjs/toolkit";
-import createSagaMiddleware from "redux-saga";
+import { configureStore } from '@reduxjs/toolkit'
+import createSagaMiddleware from 'redux-saga'
 
-import reducer from "./reducers";
+import reducer from './reducers'
 
-const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware()
 
 export const store = configureStore({
   reducer,
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActionPaths: ["payload"],
-      },
-    }).concat(sagaMiddleware),
-});
+        ignoredActionPaths: ['payload']
+      }
+    }).concat(sagaMiddleware)
+})

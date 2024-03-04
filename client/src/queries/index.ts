@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 // #1 - Remove unnecessary "receipt" field from GraphQL query
 export const GetAllTransactions = gql`
@@ -14,7 +14,7 @@ export const GetAllTransactions = gql`
       hash
     }
   }
-`;
+`
 
 export const GetSingleTransaction = gql`
   query GetSingleTransaction($hash: String!) {
@@ -29,7 +29,7 @@ export const GetSingleTransaction = gql`
       hash
     }
   }
-`;
+`
 
 export const SaveTransaction = gql`
   mutation SaveTransaction($transaction: TransactionInput!) {
@@ -37,4 +37,4 @@ export const SaveTransaction = gql`
       hash
     }
   }
-`;
+`
